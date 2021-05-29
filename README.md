@@ -13,12 +13,12 @@ Mediapipe needs OpenCV and ffmpeg libraries. You can install both of them from o
 sudo apt install python3-dev protobuf-compiler
 sudo apt install libopenexr-dev libopenexr23 libdc1394-22 libdc1394-22-dev libeigen3-dev
 ```
-* Remove preinstalled dependencies which interfere with built ffmpeg libraries
+* In case FFmpeg is not installed from official repository. Remove pre-installed packages/libraries which interfere with the built FFmpeg libraries
 ```
 sudo apt remove libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavutil56
 ```
 
-* Remove exception statements from  `ImathVec.h` & `ImathMatrix.h` to avoid `error: ISO C++17 does not allow dynamic exception specifications`
+* Remove exception statements from  `ImathVec.h` & `ImathMatrix.h` present in `/usr/include/OpenEXR/` to avoid `error: ISO C++17 does not allow dynamic exception specifications`
 ```
 sudo sed -i "s/throw (IEX_NAMESPACE::MathExc)/ /g" /usr/include/OpenEXR/ImathVec.h
 sudo sed -i "s/throw (IEX_NAMESPACE::MathExc)/ /g" /usr/include/OpenEXR/ImathMatrix.h
@@ -36,7 +36,7 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/opencv_linux.BUILD
 sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
 ```
 
-* In `opencv_linux.BUILD` comment `"include/opencv2/**/*.h*",` & uncomment `"include/opencv4/opencv2/**/*.h*"` under `hdrs`. Similarly comment `"include/",` & uncomment `"include/opencv4/",` under `includes`. 
+* In `opencv_linux.BUILD` comment `"include/opencv2/**/*.h*",` & uncomment `"include/opencv4/opencv2/**/*.h*"` under `hdrs`.  Similarly comment `"include/",` & uncomment `"include/opencv4/",` under `includes`. 
 
 * Add the following in `third_party/BUILD` after [line](https://github.com/google/mediapipe/blob/master/third_party/BUILD#L115)
 ### In case of Raspberry Pi 4
@@ -73,6 +73,7 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
         '--copt=-mtune=cortex-a53',
         '--copt=-ftree-vectorize',
         '--copt=-mfloat-abi=hard',
+        '--copt=-O3',
 ```
 
 * Build the package
@@ -89,7 +90,12 @@ cd dist; sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armhf.whl --
 ```
 
 ## Pre-built Packages
-I recommend you to build the packages yourself. In case, you want to skip it. You can download and install [deb packages](https://github.com/superuser789/MediaPipe-on-RaspberryPi).
+I recommend you to build the packages yourself.
+In case, you want to skip it. You can download [deb packages](https://github.com/superuser789/MediaPipe-on-RaspberryPi).
+First install the common packages 
+```
+sudo dpkg -i 
+```
 
 
 ## References :
@@ -98,5 +104,6 @@ I recommend you to build the packages yourself. In case, you want to skip it. Yo
 2. Building OpenCV : https://www.pyimagesearch.com/2019/09/16/install-opencv-4-on-raspberry-pi-4-and-raspbian-buster/  https://learnopencv.com/build-and-install-opencv-4-for-raspberry-pi/
 4. Building Bazel : https://github.com/koenvervloesem/bazel-on-arm
 5. Building MediaPipe : https://google.github.io/mediapipe/getting_started/install.html#installing-on-debian-and-ubuntu
+6. Optimisation flags : https://gist.github.com/fm4dd/c663217935dc17f0fc73c9c81b0aa845
 
 
