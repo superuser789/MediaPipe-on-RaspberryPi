@@ -1,6 +1,6 @@
 # MediaPipe on RaspberryPi
 
-Mediapipe needs OpenCV and ffmpeg libraries. You can install both of them from official raspberry pi repository. But these are built without optimisations and hardware accerelation. These can be built with the supported optimisations as explained [here](https://github.com/superuser789/MediaPipe-on-RaspberryPi/blob/main/BuildingFFMPEG%26OpenCV.md).
+Mediapipe needs OpenCV and FFmpeg libraries. You can install both of them from official raspberry pi repository. But these are built without optimisations and hardware accerelation. These can be built with the supported optimisations as explained [here](https://github.com/superuser789/MediaPipe-on-RaspberryPi/blob/main/BuildingFFMPEG%26OpenCV.md).
 
 
 
@@ -39,7 +39,7 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
 * In `opencv_linux.BUILD` comment `"include/opencv2/**/*.h*",` & uncomment `"include/opencv4/opencv2/**/*.h*"` under `hdrs`.  Similarly comment `"include/",` & uncomment `"include/opencv4/",` under `includes`. 
 
 * Add the following in `third_party/BUILD` after [line](https://github.com/google/mediapipe/blob/master/third_party/BUILD#L115)
-### In case of Raspberry Pi 4
+#### In case of Raspberry Pi 4
 ```
         "CMAKE_CXX_FLAGS": "-march=armv8-a+crc+simd -mcpu=cortex-a72 -mfpu=neon-fp-armv8 -mtune=cortex-a72 -mfloat-abi=hard -O3",
         "ENABLE_NEON": "ON",
@@ -48,7 +48,7 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
         "WITH_CAROTENE": "OFF",
 ```
 
-### In case of Raspberry Pi 3
+#### In case of Raspberry Pi 3
 ```
         "CMAKE_CXX_FLAGS": "-march=armv8-a+crc -mfpu=neon-vfpv4 -mtune=cortex-a53 -ftree-vectorize -mfloat-abi=hard -O3",
         "ENABLE_NEON": "ON",
@@ -57,7 +57,7 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
         "WITH_CAROTENE": "OFF",
 ```
 * Add these flags to enable neon and optimisations in `setup.py` after [line](https://github.com/google/mediapipe/blob/master/setup.py#L242) as posted by [arron2003]( https://github.com/arron2003) [here](https://github.com/google/mediapipe/issues/1629#issuecomment-814599336).
-### In case of Raspberry Pi 4
+#### In case of Raspberry Pi 4
 ```
         '--copt=-march=armv7-a',
         '--copt=-mfpu=neon-vfpv3',
@@ -66,7 +66,7 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
         '--copt=-mfloat-abi=hard',
         '--copt=-O3',
 ```
-### In case of Raspberry Pi 3
+#### In case of Raspberry Pi 3
 ```
         '--copt=-march=armv7-a',
         '--copt=-mfpu=neon-vfpv3',
