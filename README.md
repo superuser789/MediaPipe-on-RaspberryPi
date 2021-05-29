@@ -3,7 +3,8 @@
 Mediapipe needs OpenCV and ffmpeg libraries. You can install both of them from official raspberry pi repository. But these are built without optimisations and hardware accerelation. These can be built with the supported optimisations as explained [here](https://github.com/superuser789/MediaPipe-on-RaspberryPi/blob/main/BuildingFFMPEG%26OpenCV.md).
 
 
-## Building MediaPipe for Raspberry Pi 3
+
+## Building MediaPipe for Raspberry Pi 3 / 4
 
 * First, Install Bazel by following the steps [here](https://github.com/koenvervloesem/bazel-on-arm).
 
@@ -11,6 +12,10 @@ Mediapipe needs OpenCV and ffmpeg libraries. You can install both of them from o
 ```
 sudo apt install python3-dev protobuf-compiler
 sudo apt install libopenexr-dev libopenexr23 libdc1394-22 libdc1394-22-dev libeigen3-dev
+```
+* Remove preinstalled dependencies which interfere with built ffmpeg libraries
+```
+sudo apt remove libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavutil56
 ```
 
 * Remove exception statements from  `ImathVec.h` & `ImathMatrix.h` to avoid `error: ISO C++17 does not allow dynamic exception specifications`
@@ -34,6 +39,16 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
 * In `opencv_linux.BUILD` comment `"include/opencv2/**/*.h*",` & uncomment `"include/opencv4/opencv2/**/*.h*"` under `hdrs`. Similarly comment `"include/",` & uncomment `"include/opencv4/",` under `includes`. 
 
 * Add the following in `third_party/BUILD` after [line](https://github.com/google/mediapipe/blob/master/third_party/BUILD#L115)
+### In case of Raspberry Pi 4
+```
+        "CMAKE_CXX_FLAGS": "-march=armv8-a+crc+simd -mcpu=cortex-a72 -mfpu=neon-fp-armv8 -mtune=cortex-a72 -mfloat-abi=hard -O3",
+        "ENABLE_NEON": "ON",
+        "WITH_TENGINE": "ON",
+        "ENABLE_VFPV4": "ON",
+        "WITH_CAROTENE": "OFF",
+```
+
+### In case of Raspberry Pi 3
 ```
         "CMAKE_CXX_FLAGS": "-march=armv8-a+crc -mfpu=neon-vfpv4 -mtune=cortex-a53 -ftree-vectorize -mfloat-abi=hard -O3",
         "ENABLE_NEON": "ON",
@@ -41,7 +56,17 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
         "ENABLE_VFPV4": "ON",
         "WITH_CAROTENE": "OFF",
 ```
-* Add these flags to enable neon and optimisations in `setup.py` after [line](https://github.com/google/mediapipe/blob/master/setup.py#L240) as posted by [arron2003]( https://github.com/arron2003) [here](https://github.com/google/mediapipe/issues/1629#issuecomment-814599336).
+* Add these flags to enable neon and optimisations in `setup.py` after [line](https://github.com/google/mediapipe/blob/master/setup.py#L242) as posted by [arron2003]( https://github.com/arron2003) [here](https://github.com/google/mediapipe/issues/1629#issuecomment-814599336).
+### In case of Raspberry Pi 4
+```
+        '--copt=-march=armv7-a',
+        '--copt=-mfpu=neon-vfpv3',
+        '--copt=-mcpu=cortex-a72',
+        '--copt=-mtune=cortex-a72',
+        '--copt=-mfloat-abi=hard',
+        '--copt=-O3',
+```
+### In case of Raspberry Pi 3
 ```
         '--copt=-march=armv7-a',
         '--copt=-mfpu=neon-vfpv3',
@@ -60,7 +85,7 @@ sudo python3 -m pip install absl-py attrs>=19.1.0 numpy protobuf>=3.11.4 six whe
 ```
 * Install it
 ```
-sudo python3 -m pip install dist/mediapipe-0.8-cp37-cp37m-linux_armhf.whl --no-deps
+cd dist; sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armhf.whl --no-deps
 ```
 
 ## Pre-built Packages
