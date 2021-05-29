@@ -44,7 +44,7 @@ make -j4
 sudo checkinstall -y --pkgname ffmpeg --pkgversion 4.4.0 make install
 sudo dpkg -i ffmpeg_4.4.0-1_armhf.deb
 ```
-
+#
 ## Building OpenCV
 
 Follow the detailed guides from [here](https://www.pyimagesearch.com/2019/09/16/install-opencv-4-on-raspberry-pi-4-and-raspbian-buster/) & [here](https://learnopencv.com/build-and-install-opencv-4-for-raspberry-pi/).
@@ -84,3 +84,4 @@ make -j4
 sudo checkinstall -y --pkgname opencv --pkgversion 4.5.2 make install
 sudo dpkg -i opencv_4.5.2-1_armhf.deb
 ```
+#
