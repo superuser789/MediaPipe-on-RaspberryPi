@@ -38,7 +38,7 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
 
 * In `opencv_linux.BUILD` comment `"include/opencv2/**/*.h*",` & uncomment `"include/opencv4/opencv2/**/*.h*"` under `hdrs`.  Similarly comment `"include/",` & uncomment `"include/opencv4/",` under `includes`. 
 
-* Add the following in `third_party/BUILD` after [line](https://github.com/google/mediapipe/blob/master/third_party/BUILD#L115)
+* Add the following in [`third_party/BUILD`](https://github.com/google/mediapipe/blob/master/third_party/BUILD) after [`"WITH_WEBP": "OFF",`](https://github.com/google/mediapipe/blob/master/third_party/BUILD#L115)
 #### In case of Raspberry Pi 4
 ```
         "CMAKE_CXX_FLAGS": "-march=armv8-a+crc+simd -mcpu=cortex-a72 -mfpu=neon-fp-armv8 -mtune=cortex-a72 -mfloat-abi=hard -O3",
@@ -56,7 +56,7 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
         "ENABLE_VFPV4": "ON",
         "WITH_CAROTENE": "OFF",
 ```
-* Add these flags to enable neon and optimisations in `setup.py` after [line](https://github.com/google/mediapipe/blob/master/setup.py#L242) as posted by [arron2003]( https://github.com/arron2003) [here](https://github.com/google/mediapipe/issues/1629#issuecomment-814599336).
+* Add these flags to enable neon and optimisations in [`setup.py`](https://github.com/google/mediapipe/blob/master/setup.py) after [`'--compilation_mode=opt',`](https://github.com/google/mediapipe/blob/master/setup.py#L242) as posted by [arron2003]( https://github.com/arron2003) [here](https://github.com/google/mediapipe/issues/1629#issuecomment-814599336).
 #### In case of Raspberry Pi 4
 ```
         '--copt=-march=armv7-a',
