@@ -20,7 +20,7 @@ cd ffmpeg-4*
 --prefix=/usr \
 --enable-gpl \
 --enable-nonfree \
---enable-static \
+--enable-shared \
 --enable-libtheora \
 --enable-libvorbis \
 --enable-omx \
@@ -36,7 +36,8 @@ cd ffmpeg-4*
 --extra-cflags="-march=armv8-a+crc -mfpu=neon-vfpv4 -mtune=cortex-a53 -ftree-vectorize -mfloat-abi=hard -O3" \
 --enable-libx264 \
 --enable-libfdk-aac \
---enable-libmp3lame
+--enable-libmp3lame \
+--enable-avresample
 ```
 * Build & Install it
 ```
