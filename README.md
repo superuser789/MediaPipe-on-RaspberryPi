@@ -4,7 +4,7 @@ Mediapipe needs OpenCV and FFmpeg libraries. You can install both of them from o
 
 
 
-## Building MediaPipe for Raspberry Pi 3 / 4
+## Building MediaPipe on Raspberry Pi OS for Raspberry Pi 3 / 4
 
 * First, Install Bazel by following the steps [here](https://github.com/koenvervloesem/bazel-on-arm).
 
