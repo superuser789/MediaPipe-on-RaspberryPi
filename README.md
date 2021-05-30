@@ -107,6 +107,11 @@ sudo dpkg -i fdk-aac_2.0.2-1_armhf.deb  libass_0.15.1-1_armhf.deb  mp3lame_3.100
 sudo dpkg -i ffmpeg_4.4.0-1_armhf.deb  opencv_4.5.2-1_armhf.deb
 sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armv7l.whl  --no-deps
 ```
+#### To uninstall packages
+```
+sudo apt remove fdk-aac mp3lame libass x264 ffmpeg opencv
+sudo python3 -m pip uninstall mediapipe
+```
 
 
 
@@ -117,5 +122,4 @@ sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armv7l.whl  --no-deps
 4. Building Bazel : https://github.com/koenvervloesem/bazel-on-arm
 5. Building MediaPipe : https://google.github.io/mediapipe/getting_started/install.html#installing-on-debian-and-ubuntu
 6. Optimisation flags : https://gist.github.com/fm4dd/c663217935dc17f0fc73c9c81b0aa845
-
-
+#
