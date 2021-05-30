@@ -98,11 +98,11 @@ sudo apt install libxcb-shm0 libcdio-paranoia-dev libsdl2-2.0-0 libxv1  libtheor
 sudo apt install python3-pip   libatlas-base-dev libhdf5-103 libgtk-3-0 libdc1394-22 libopenexr23
 sudo python3 -m pip install absl-py attrs>=19.1.0 numpy protobuf>=3.11.4 six wheel
 ```
-* Install the packages present in `common` directory
+* Install the packages present in [common](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/common) directory
 ```
 sudo dpkg -i fdk-aac_2.0.2-1_armhf.deb  libass_0.15.1-1_armhf.deb  mp3lame_3.100-1_armhf.deb  x264_0.163-1_armhf.deb
 ```
-* Based on RaspberryPi 3 or 4, Install FFmpeg & OpenCV and MediaPipe python package
+* Based on RaspberryPi [3](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/RPi%203) or [4](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/RPi%204), Install FFmpeg & OpenCV and MediaPipe python package
 ```
 sudo dpkg -i ffmpeg_4.4.0-1_armhf.deb  opencv_4.5.2-1_armhf.deb
 sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armv7l.whl  --no-deps
