@@ -1,6 +1,6 @@
 # MediaPipe on RaspberryPi
 
-Mediapipe needs OpenCV and FFmpeg libraries. You can install both of them from official raspberry pi repository. But these are built without optimisations and hardware accerelation. These can be built with the supported optimisations as explained [here](https://github.com/superuser789/MediaPipe-on-RaspberryPi/blob/main/BuildingFFMPEG%26OpenCV.md).
+Mediapipe needs OpenCV and FFmpeg libraries. You can install both of them from official raspberry pi repository. But these are built without optimisations and hardware acceleration. These can be built with the supported optimisations as explained [here](https://github.com/superuser789/MediaPipe-on-RaspberryPi/blob/main/BuildingFFMPEG%26OpenCV.md).
 
 
 
@@ -91,7 +91,7 @@ cd dist; sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armv7l.whl -
 
 ## Pre-built Packages
 I recommend you to build the packages yourself.
-In case, you want to skip it. You can download [deb packages](https://github.com/superuser789/MediaPipe-on-RaspberryPi).
+In case, you want to skip it. You can download [pre-built packages](https://github.com/superuser789/MediaPipe-on-RaspberryPi).
 * Install dependency packages 
 ```
 sudo apt install libxcb-shm0 libcdio-paranoia-dev libsdl2-2.0-0 libxv1  libtheora0 libva-drm2 libva-x11-2 libvdpau1 libharfbuzz0b libbluray2
@@ -100,11 +100,11 @@ sudo python3 -m pip install absl-py attrs>=19.1.0 numpy protobuf>=3.11.4 six whe
 ```
 * Install the packages present in `common` directory
 ```
-sudo dpkg -i fdk-aac_2.0.2-1_armhf.deb libass_0.15.1-1_armhf.deb mp3lame_3.100-1_armhf.deb x264_0.163-1_armhf.deb
+sudo dpkg -i fdk-aac_2.0.2-1_armhf.deb  libass_0.15.1-1_armhf.deb  mp3lame_3.100-1_armhf.deb  x264_0.163-1_armhf.deb
 ```
 * Based on RaspberryPi 3 or 4, Install FFmpeg & OpenCV and MediaPipe python package
 ```
-sudo dpkg -i ffmpeg_4.4.0-1_armhf.deb opencv_4.5.2-1_armhf.deb
+sudo dpkg -i ffmpeg_4.4.0-1_armhf.deb  opencv_4.5.2-1_armhf.deb
 sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armv7l.whl  --no-deps
 ```
 
