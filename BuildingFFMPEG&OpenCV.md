@@ -12,7 +12,7 @@ In short, first build the dependencies - fdk-aac, mp3lame, libass, x264.
 ```
 wget https://ffmpeg.org/releases/ffmpeg-4.4.tar.bz2  -O ffmpeg.tar.bz2
 tar xvf ffmpeg.tar.bz2
-cd ffmpeg-4*
+cd ffmpeg-*
 ```
 * Configure it
 #### In case of Raspberry Pi 4
@@ -89,7 +89,7 @@ tar xvf opencv*
 cd opencv-4.5.2
 mkdir build ; cd build
 ```
-* Note full path of `modules` directory in `opencv_contrib` and replace '/home/pi/cv/opencv_contrib-4.5.2/modules' with your modules path.
+* Note full path of `modules` directory in `opencv_contrib` and replace `/home/pi/cv/opencv_contrib-4.5.2/modules` with your modules path.
 
 * Configure it
 #### In case of Raspberry Pi 4
@@ -134,7 +134,7 @@ sudo dpkg -i opencv_4.5.2-1_armhf.deb
 
 ### To Remove these FFmpeg & OpenCV packages
 ```
-sudo apt remove ffmpeg
+sudo apt remove fdk-aac mp3lame libass x264 ffmpeg
 sudo apt remove opencv
 ```
 #
