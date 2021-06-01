@@ -6,7 +6,7 @@
 ## Installation
 1. Install FFmpeg and OpenCV from Official repository
 
-Note: FFmpeg and OpenCV from official repository have been built without optimisations and hardware acceleration. These can be built from sources with the supported optimisations
+Note: FFmpeg and OpenCV from official repository have been built without optimisations and hardware acceleration. It is recommended to build from sources with the supported optimisations
 ```
 sudo apt install ffmpeg python-opencv
 ```
@@ -25,24 +25,24 @@ sudo apt install libxcb-shm0 libcdio-paranoia-dev libsdl2-2.0-0 libxv1  libtheor
 ### For Raspberry Pi 4
 #### 3. Install package
 ```
-sudo pip install mediapipe-rpi4
+sudo pip3 install mediapipe-rpi4
 ```
 
 #### To Uninstall package
 ```
-sudo pip uninstall mediapipe-rpi4
+sudo pip3 uninstall mediapipe-rpi4
 ```
 
 
 ### For Raspberry Pi 3
 #### 3. Install package
 ```
-sudo pip install mediapipe-rpi3
+sudo pip3 install mediapipe-rpi3
 ```
 
 #### To Uninstall package
 ```
-sudo pip uninstall mediapipe-rpi3
+sudo pip3 uninstall mediapipe-rpi3
 ```
 
 
