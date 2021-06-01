@@ -3,7 +3,7 @@
 ## Project Homepage : https://github.com/google/mediapipe
 
 
-### Installation
+## Installation
 1. Install FFmpeg and OpenCV from Official repository
 
 Note: FFmpeg and OpenCV from official repository have been built without optimisations and hardware acceleration. These can be built from sources with the supported optimisations
