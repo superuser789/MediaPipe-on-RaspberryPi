@@ -1,44 +1,48 @@
 # MediaPipe on RaspberryPi
 
-Mediapipe needs OpenCV and FFmpeg libraries. You can install both of them from official raspberry pi repository. But these are built without optimisations and hardware acceleration. These can be built with the supported optimisations as explained [here](https://github.com/superuser789/MediaPipe-on-RaspberryPi/blob/main/BuildingFFMPEG%26OpenCV.md).
+Mediapipe needs OpenCV and FFmpeg libraries. You can install both of them from official raspberry pi repository :
+```
+sudo apt install ffmpeg python3-opencv
+```
+But these are built with less optimisations. These can be built with the supported optimisations as explained [here](https://github.com/superuser789/MediaPipe-on-RaspberryPi/blob/main/BuildingFFMPEG%26OpenCV.md).
 
 
 
 ## Building MediaPipe on Raspberry Pi OS for Raspberry Pi 3 / 4
 
-* First, Install Bazel by following the steps [here](https://github.com/koenvervloesem/bazel-on-arm).
+1. First, Install Bazel by following the steps [here](https://github.com/koenvervloesem/bazel-on-arm).
 
-* Install the required dependencies :
+2. Install the required dependencies :
 ```
 sudo apt install python3-dev protobuf-compiler
 sudo apt install libopenexr-dev libopenexr23 libdc1394-22 libdc1394-22-dev libeigen3-dev
 ```
-* In case FFmpeg is not installed from official repository. Remove pre-installed packages/libraries which interfere with the built FFmpeg libraries
+ * In case FFmpeg is not installed from official repository. Remove pre-installed packages/libraries which interfere with the built FFmpeg libraries
 ```
 sudo apt remove libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavutil56
 ```
 
-* Remove exception statements from  `ImathVec.h` & `ImathMatrix.h` present in `/usr/include/OpenEXR/` to avoid `error: ISO C++17 does not allow dynamic exception specifications`
+3. Remove exception statements from  `ImathVec.h` & `ImathMatrix.h` present in `/usr/include/OpenEXR/` to avoid `error: ISO C++17 does not allow dynamic exception specifications`
 ```
 sudo sed -i "s/throw (IEX_NAMESPACE::MathExc)/ /g" /usr/include/OpenEXR/ImathVec.h
 sudo sed -i "s/throw (IEX_NAMESPACE::MathExc)/ /g" /usr/include/OpenEXR/ImathMatrix.h
 ```
-* Download the source code
+4. Download the source code
 ```
 wget https://github.com/google/mediapipe/archive/refs/tags/v0.8.4.tar.gz -O mediapipe-0.8.4.tar.gz
 tar xvf mediapipe-0.8.4.tar.gz
 cd mediapipe-0.8.4
 ```
 
-* Make the changes in `opencv_linux.BUILD` & `ffmpeg_linux.BUILD` by pointing to opencv & ffmpeg libraries
+5. Make the changes in `opencv_linux.BUILD` & `ffmpeg_linux.BUILD` by pointing to opencv & ffmpeg libraries
 ```
 sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/opencv_linux.BUILD
 sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
 ```
 
-* In `opencv_linux.BUILD` comment `"include/opencv2/**/*.h*",` & uncomment `"include/opencv4/opencv2/**/*.h*"` under `hdrs`.  Similarly comment `"include/",` & uncomment `"include/opencv4/",` under `includes`. 
+6. In `opencv_linux.BUILD` comment `"include/opencv2/**/*.h*",` & uncomment `"include/opencv4/opencv2/**/*.h*"` under `hdrs`.  Similarly comment `"include/",` & uncomment `"include/opencv4/",` under `includes`. 
 
-* Add the following in [`third_party/BUILD`](https://github.com/google/mediapipe/blob/master/third_party/BUILD) after [`"WITH_WEBP": "OFF",`](https://github.com/google/mediapipe/blob/master/third_party/BUILD#L115)
+7. Add the following in [`third_party/BUILD`](https://github.com/google/mediapipe/blob/master/third_party/BUILD) after [`"WITH_WEBP": "OFF",`](https://github.com/google/mediapipe/blob/master/third_party/BUILD#L115)
 #### In case of Raspberry Pi 4
 ```
         "CMAKE_CXX_FLAGS": "-march=armv8-a+crc+simd -mcpu=cortex-a72 -mfpu=neon-fp-armv8 -mtune=cortex-a72 -mfloat-abi=hard -O3",
@@ -56,7 +60,7 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
         "ENABLE_VFPV4": "ON",
         "WITH_CAROTENE": "OFF",
 ```
-* Add these flags to enable neon and optimisations in [`setup.py`](https://github.com/google/mediapipe/blob/master/setup.py) after [`'--compilation_mode=opt',`](https://github.com/google/mediapipe/blob/master/setup.py#L242) as posted by [arron2003]( https://github.com/arron2003) [here](https://github.com/google/mediapipe/issues/1629#issuecomment-814599336).
+8. Add these flags to enable neon and optimisations in [`setup.py`](https://github.com/google/mediapipe/blob/master/setup.py) after [`'--compilation_mode=opt',`](https://github.com/google/mediapipe/blob/master/setup.py#L242) as posted by [arron2003]( https://github.com/arron2003) [here](https://github.com/google/mediapipe/issues/1629#issuecomment-814599336).
 #### In case of Raspberry Pi 4
 ```
         '--copt=-march=armv7-a',
@@ -76,15 +80,15 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
         '--copt=-O3',
 ```
 
-* Build the package
+9. Build the package
 ```
 python3 setup.py gen_protos && python3 setup.py bdist_wheel
 ```
-* Install required python libraries
+10. Install required python libraries
 ```
 sudo python3 -m pip install absl-py attrs>=19.1.0 numpy protobuf>=3.11.4 six wheel
 ```
-* Install it
+11. Install it
 ```
 cd dist; sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armv7l.whl --no-deps
 ```
@@ -92,22 +96,22 @@ cd dist; sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armv7l.whl -
 ## Pre-built Packages
 I recommend you to build the packages yourself.
 In case, you want to skip it. You can download [pre-built packages](https://github.com/superuser789/MediaPipe-on-RaspberryPi).
-* Install dependency packages 
+1. Install dependency packages 
 ```
 sudo apt install libxcb-shm0 libcdio-paranoia-dev libsdl2-2.0-0 libxv1  libtheora0 libva-drm2 libva-x11-2 libvdpau1 libharfbuzz0b libbluray2
 sudo apt install python3-pip   libatlas-base-dev libhdf5-103 libgtk-3-0 libdc1394-22 libopenexr23
 sudo python3 -m pip install absl-py attrs>=19.1.0 numpy protobuf>=3.11.4 six wheel
 ```
-* Install the packages present in [common](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/common) directory
+2. Install the packages present in [common](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/common) directory
 ```
 sudo dpkg -i fdk-aac_2.0.2-1_armhf.deb  libass_0.15.1-1_armhf.deb  mp3lame_3.100-1_armhf.deb  x264_0.163-1_armhf.deb
 ```
-* Based on RaspberryPi [3](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/RPi%203) or [4](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/RPi%204), Install FFmpeg & OpenCV and MediaPipe python package
+3. Based on RaspberryPi [3](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/RPi%203) or [4](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/RPi%204), Install FFmpeg & OpenCV and MediaPipe python package
 ```
 sudo dpkg -i ffmpeg_4.4.0-1_armhf.deb  opencv_4.5.2-1_armhf.deb
 sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armv7l.whl  --no-deps
 ```
-#### To uninstall packages
+#### To uninstall built packages
 ```
 sudo apt remove fdk-aac mp3lame libass x264 ffmpeg opencv
 sudo python3 -m pip uninstall mediapipe
