@@ -5,14 +5,12 @@
 
 ## Installation
 1. Install FFmpeg and OpenCV from Official repository
-
-Note: FFmpeg and OpenCV from official repository have been built without optimisations and hardware acceleration. It is recommended to build from sources with the supported optimisations
 ```
-sudo apt install ffmpeg python-opencv
+sudo apt install ffmpeg python3-opencv
 ```
-
+Note: FFmpeg and OpenCV from official repository have been built with less optimisations. It is recommended to build from sources with the supported optimisations
 *OR*
-* Build from sources using this [Guide](https://github.com/superuser789/MediaPipe-on-RaspberryPi#readme) 
+* Build FFmpeg and OpenCV from sources using this [Guide](https://github.com/superuser789/MediaPipe-on-RaspberryPi#readme) 
 
 
 2. Install dependency packages 
