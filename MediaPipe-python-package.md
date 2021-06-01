@@ -17,7 +17,7 @@ sudo apt install libxcb-shm0 libcdio-paranoia-dev libsdl2-2.0-0 libxv1  libtheor
 
 
 
-### For Raspberry Pi 4
+### On Raspberry Pi 4
 #### 2. Install package
 ```
 sudo pip3 install mediapipe-rpi4
@@ -29,7 +29,7 @@ sudo pip3 uninstall mediapipe-rpi4
 ```
 
 
-### For Raspberry Pi 3
+### On Raspberry Pi 3
 #### 2. Install package
 ```
 sudo pip3 install mediapipe-rpi3
