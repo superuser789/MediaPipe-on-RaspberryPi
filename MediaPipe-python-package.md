@@ -6,7 +6,7 @@
 ## Installation
 1. Install FFmpeg and OpenCV from official repository  *OR*  Build from sources using this [Guide](https://github.com/superuser789/MediaPipe-on-RaspberryPi/blob/main/BuildingFFMPEG%26OpenCV.md) .
 ```
-sudo apt install ffmpeg python3-opencv python3-pip
+sudo apt install ffmpeg  python3-opencv  python3-pip
 ```
 Note: FFmpeg and OpenCV from official repository have been built with less optimisations. It is recommended to build from sources with the supported optimisations.
 
@@ -18,7 +18,7 @@ sudo apt install libxcb-shm0 libcdio-paranoia-dev libsdl2-2.0-0 libxv1  libtheor
 
 
 ### For Raspberry Pi 4
-#### 3. Install package
+#### 2. Install package
 ```
 sudo pip3 install mediapipe-rpi4
 ```
@@ -30,7 +30,7 @@ sudo pip3 uninstall mediapipe-rpi4
 
 
 ### For Raspberry Pi 3
-#### 3. Install package
+#### 2. Install package
 ```
 sudo pip3 install mediapipe-rpi3
 ```
