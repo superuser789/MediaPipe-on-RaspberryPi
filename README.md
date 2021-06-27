@@ -94,6 +94,8 @@ cd dist; sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armv7l.whl -
 ```
 
 ## Pre-built Packages
+### Note : The Pre-built mediapipe package works well on Raspberry Pi OS 32 bit only for Raspberry Pi 3 and 4. Installing it on other platforms might not work.
+
 I recommend you to build the packages yourself.
 In case, you want to skip it. You can download [pre-built packages](https://github.com/superuser789/MediaPipe-on-RaspberryPi).
 1. Install dependency packages 
