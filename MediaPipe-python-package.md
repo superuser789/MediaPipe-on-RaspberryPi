@@ -1,5 +1,7 @@
 # MediaPipe Python Package for RaspberryPi OS on Raspberry Pi 3 / 4
 
+## Note : Currently only RaspberryPi OS 32 bit version is supported by the built mediapipe package. It might not work on other OS's.
+
 ## Project Homepage : https://github.com/google/mediapipe
 
 
