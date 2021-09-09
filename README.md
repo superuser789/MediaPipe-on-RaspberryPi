@@ -34,7 +34,7 @@ tar xvf mediapipe-0.8.4.tar.gz
 cd mediapipe-0.8.4
 ```
 
-5. Make the changes in `opencv_linux.BUILD` & `ffmpeg_linux.BUILD` by pointing to opencv & ffmpeg libraries
+5.  Skip this step if mediapipe version > 0.8.6.  <br>Make the changes in `opencv_linux.BUILD` & `ffmpeg_linux.BUILD` by pointing to opencv & ffmpeg libraries
 ```
 sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/opencv_linux.BUILD
 sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
@@ -60,7 +60,8 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
         "ENABLE_VFPV4": "ON",
         "WITH_CAROTENE": "OFF",
 ```
-8. Add these flags to enable neon and optimisations in [`setup.py`](https://github.com/google/mediapipe/blob/master/setup.py) after [`'--compilation_mode=opt',`](https://github.com/google/mediapipe/blob/master/setup.py#L242) as posted by [arron2003]( https://github.com/arron2003) [here](https://github.com/google/mediapipe/issues/1629#issuecomment-814599336).
+8. Add these flags to enable neon and optimisations in [`setup.py`](https://github.com/google/mediapipe/blob/master/setup.py) after [`'--compilation_mode=opt',`](https://github.com/google/mediapipe/blob/master/setup.py#L301) as posted by [arron2003]( https://github.com/arron2003) [here](https://github.com/google/mediapipe/issues/1629#issuecomment-814599336).
+  <b>Note:</b> Add them in function `bazel_build` inside `class BuildBazelExtension` after `'--compilation_mode=opt'`.
 #### In case of Raspberry Pi 4
 ```
         '--copt=-march=armv7-a',
@@ -86,7 +87,7 @@ python3 setup.py gen_protos && python3 setup.py bdist_wheel
 ```
 10. Install required python libraries
 ```
-sudo python3 -m pip install absl-py attrs>=19.1.0 numpy protobuf>=3.11.4 six wheel
+sudo python3 -m pip install absl-py attrs>=19.1.0 numpy protobuf>=3.11.4 six wheel matplotlib
 ```
 11. Install it
 ```
