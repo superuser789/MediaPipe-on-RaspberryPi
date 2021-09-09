@@ -61,7 +61,7 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
         "WITH_CAROTENE": "OFF",
 ```
 8. Add these flags to enable neon and optimisations in [`setup.py`](https://github.com/google/mediapipe/blob/master/setup.py) after [`'--compilation_mode=opt',`](https://github.com/google/mediapipe/blob/master/setup.py#L301) as posted by [arron2003]( https://github.com/arron2003) [here](https://github.com/google/mediapipe/issues/1629#issuecomment-814599336).
-  <b>Note:</b> Add them in function `bazel_build` inside `class BuildBazelExtension` after `'--compilation_mode=opt'`.
+  <br><b>Note:</b> Add them in function `bazel_build` inside `class BuildBazelExtension` after `'--compilation_mode=opt'`.
 #### In case of Raspberry Pi 4
 ```
         '--copt=-march=armv7-a',
