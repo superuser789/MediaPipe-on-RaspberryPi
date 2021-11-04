@@ -29,9 +29,9 @@ sudo sed -i "s/throw (IEX_NAMESPACE::MathExc)/ /g" /usr/include/OpenEXR/ImathMat
 ```
 4. Download the source code
 ```
-wget https://github.com/google/mediapipe/archive/refs/tags/v0.8.4.tar.gz -O mediapipe-0.8.4.tar.gz
-tar xvf mediapipe-0.8.4.tar.gz
-cd mediapipe-0.8.4
+wget https://github.com/google/mediapipe/archive/refs/tags/v0.8.8.tar.gz -O mediapipe-0.8.8.tar.gz
+tar xvf mediapipe-0.8.8.tar.gz
+cd mediapipe-0.8.8
 ```
 
 5.  Skip this step if mediapipe version > 0.8.6.  <br>Make the changes in `opencv_linux.BUILD` & `ffmpeg_linux.BUILD` by pointing to opencv & ffmpeg libraries
@@ -40,7 +40,7 @@ sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/opencv_linux.BUILD
 sed -i "s/x86_64-linux-gnu/arm-linux-gnueabihf/g" third_party/ffmpeg_linux.BUILD
 ```
 
-6. In `opencv_linux.BUILD` comment `"include/opencv2/**/*.h*",` & uncomment `"include/opencv4/opencv2/**/*.h*"` under `hdrs`.  Similarly comment `"include/",` & uncomment `"include/opencv4/",` under `includes`. 
+6. In `third_party/opencv_linux.BUILD` comment `"include/opencv2/**/*.h*",` & uncomment `"include/opencv4/opencv2/**/*.h*"` under `hdrs`.  Similarly comment `"include/",` & uncomment `"include/opencv4/",` under `includes`. 
 
 7. Add the following in [`third_party/BUILD`](https://github.com/google/mediapipe/blob/master/third_party/BUILD) after [`"WITH_WEBP": "OFF",`](https://github.com/google/mediapipe/blob/master/third_party/BUILD#L115)
 #### In case of Raspberry Pi 4
@@ -103,7 +103,7 @@ In case, you want to skip it. You can download [pre-built packages](https://gith
 ```
 sudo apt install libxcb-shm0 libcdio-paranoia-dev libsdl2-2.0-0 libxv1  libtheora0 libva-drm2 libva-x11-2 libvdpau1 libharfbuzz0b libbluray2
 sudo apt install python3-pip   libatlas-base-dev libhdf5-103 libgtk-3-0 libdc1394-22 libopenexr23
-sudo python3 -m pip install absl-py attrs>=19.1.0 numpy protobuf>=3.11.4 six wheel
+sudo python3 -m pip install absl-py attrs>=19.1.0 numpy protobuf>=3.11.4 six wheel matplotlib
 ```
 2. Install the packages present in [common](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/common) directory
 ```
@@ -111,8 +111,8 @@ sudo dpkg -i fdk-aac_2.0.2-1_armhf.deb  libass_0.15.1-1_armhf.deb  mp3lame_3.100
 ```
 3. Based on RaspberryPi [3](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/RPi%203) or [4](https://github.com/superuser789/MediaPipe-on-RaspberryPi/tree/main/RPi%204), Install FFmpeg & OpenCV and MediaPipe python package
 ```
-sudo dpkg -i ffmpeg_4.4.0-1_armhf.deb  opencv_4.5.2-1_armhf.deb
-sudo python3 -m pip install mediapipe-0.8-cp37-cp37m-linux_armv7l.whl  --no-deps
+sudo dpkg -i ffmpeg_4.4.1-1_armhf.deb  opencv_4.5.4-1_armhf.deb
+sudo python3 -m pip install mediapipe-0.8.8-cp37-cp37m-linux_armv7l.whl  --no-deps
 ```
 #### To uninstall built packages
 ```
